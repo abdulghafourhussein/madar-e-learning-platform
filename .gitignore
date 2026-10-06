@@ -1,0 +1,32 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# .NET
+*.user
+*.sln.docstates
+
+# Test results
+TestResults/
+*.trx
+
+# Logs
+*.log
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# Local configuration / secrets
+appsettings.Local.json
+appsettings.*.Local.json
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,105 @@
+﻿@model List<Madar.Models.Lecture>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "المحاضرات";
+}
+
+<div class="container mt-4">
+
+    <!-- ====== رسالة التأكيد بعد تسجيل الحضور ====== -->
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["Message"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+    <!-- ============================================ -->
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>📚 جميع المحاضرات</h2>
+        <!-- صندوق البحث -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form asp-action="Search" method="get">
+                    <div class="input-group">
+                        <input type="text" name="searchTerm" class="form-control"
+                               placeholder="🔍 ابحث عن محاضرة..."
+                               value="@ViewBag.SearchTerm" />
+                        <button type="submit" class="btn btn-primary">بحث</button>
+                        @if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+                        {
+                            <a asp-action="Index" class="btn btn-secondary">❌ مسح</a>
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- ================ -->
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+        {
+            <a asp-action="Create" class="btn btn-success">➕ إضافة محاضرة جديدة</a>
+        }
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info text-center">
+            <p class="mb-2">لا توجد محاضرات حتى الآن.</p>
+            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+            {
+                <a asp-action="Create" class="btn btn-primary">➕ أضف أول محاضرة</a>
+            }
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>عنوان المحاضرة</th>
+                    <th>التاريخ</th>
+                    <th>الوصف</th>
+                    <th>الإجراءات</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int counter = 1;
+                }
+                @foreach (var lecture in Model)
+                {
+                    <tr>
+                        <td>@counter</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@lecture.Id" style="text-decoration: none; font-weight: bold;">
+                                @lecture.Title
+                            </a>
+                        </td>
+                        <td>@lecture.LectureDate.ToString("yyyy-MM-dd")</td>
+                        <td>@lecture.Description</td>
+                        <td>
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Edit" asp-route-id="@lecture.Id" class="btn btn-sm btn-warning">✏️ تعديل</a>
+                                <a asp-action="Delete" asp-route-id="@lecture.Id" class="btn btn-sm btn-danger">🗑️ حذف</a>
+                            }
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Student"))
+                            {
+                                <form asp-controller="Attendance" asp-action="Register" method="post" style="display:inline;">
+                                    <input type="hidden" name="lectureId" value="@lecture.Id" />
+                                    <button type="submit" class="btn btn-sm btn-info">✅ تسجيل حضور</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                    counter++;
+                }
+            </tbody>
+        </table>
+    }
+</div>

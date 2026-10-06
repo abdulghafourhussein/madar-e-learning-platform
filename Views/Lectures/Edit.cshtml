@@ -1,0 +1,49 @@
+﻿@model Madar.Models.Lecture
+
+@{
+    ViewData["Title"] = "تعديل محاضرة";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">✏️ تعديل المحاضرة</h2>
+
+    <form asp-action="Edit" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- حقل مخفي: يحمل id المحاضرة ليتم إرساله مع النموذج -->
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label">عنوان المحاضرة</label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">وصف المحاضرة</label>
+            <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="VideoUrl" class="form-label">رابط الفيديو (يوتيوب)</label>
+            <input asp-for="VideoUrl" class="form-control" />
+            <span asp-validation-for="VideoUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="LectureDate" class="form-label">تاريخ المحاضرة</label>
+            <input asp-for="LectureDate" type="date" class="form-control" />
+            <span asp-validation-for="LectureDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-warning">💾 حفظ التعديلات</button>
+            <a asp-action="Index" class="btn btn-secondary">🔙 العودة إلى القائمة</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

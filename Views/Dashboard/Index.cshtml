@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "لوحة الإحصائيات";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">📊 لوحة الإحصائيات</h2>
+
+    <!-- بطاقات إحصائية -->
+    <div class="row mb-5">
+        <div class="col-md-6 mb-3">
+            <div class="card bg-primary text-white text-center">
+                <div class="card-body">
+                    <h5 class="card-title">📚 عدد المحاضرات</h5>
+                    <h1>@ViewBag.TotalLectures</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="card bg-success text-white text-center">
+                <div class="card-body">
+                    <h5 class="card-title">👥 عدد الطلاب</h5>
+                    <h1>@ViewBag.TotalStudents</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- جدول الحضور لكل محاضرة -->
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h5>📋 عدد مرات الحضور لكل محاضرة</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Count == 0)
+            {
+                <div class="alert alert-info">لا يوجد حضور مسجل بعد.</div>
+            }
+            else
+            {
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>عنوان المحاضرة</th>
+                            <th>عدد الحضور</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int counter = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@counter</td>
+                                <td>@item.LectureTitle</td>
+                                <td>
+                                    <span class="badge bg-primary">@item.Count</span>
+                                </td>
+                            </tr>
+                            counter++;
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,320 @@
+/* ============================================ */
+/*         الخطوط والأساسيات                     */
+/* ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+body {
+    direction: rtl;
+    font-family: 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+/* ============================================ */
+/*         الألوان الأساسية                     */
+/* ============================================ */
+:root {
+    --primary: #4A90D9;
+    --primary-dark: #357ABD;
+    --success: #27AE60;
+    --warning: #F39C12;
+    --danger: #E74C3C;
+    --info: #3498DB;
+    --dark: #2C3E50;
+    --light: #ECF0F1;
+}
+
+/* ============================================ */
+/*         Navbar جذاب                          */
+/* ============================================ */
+.navbar {
+    background: linear-gradient(135deg, #2C3E50 0%, #3498DB 100%) !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    padding: 10px 0;
+}
+
+.navbar-brand {
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: white !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.navbar .nav-link {
+    color: rgba(255,255,255,0.9) !important;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    padding: 8px 16px !important;
+    margin: 0 3px;
+}
+
+    .navbar .nav-link:hover {
+        color: white !important;
+        background-color: rgba(255,255,255,0.15);
+        transform: translateY(-2px);
+    }
+
+.navbar .badge {
+    font-size: 0.75rem;
+    vertical-align: middle;
+}
+
+/* ============================================ */
+/*         البطاقات (Cards)                      */
+/* ============================================ */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    background: white;
+}
+
+    .card:hover {
+        box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        transform: translateY(-3px);
+    }
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+    font-weight: 700;
+}
+
+/* ============================================ */
+/*         الجداول (Tables)                     */
+/* ============================================ */
+.table {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+    .table thead {
+        background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+        color: white;
+    }
+
+    .table tbody tr {
+        transition: all 0.2s ease;
+    }
+
+        .table tbody tr:hover {
+            background-color: #EBF5FB;
+            transform: scale(1.005);
+        }
+
+    .table td a {
+        color: #2C3E50;
+        transition: color 0.2s;
+    }
+
+        .table td a:hover {
+            color: #3498DB;
+        }
+
+/* ============================================ */
+/*         الأزرار (Buttons)                    */
+/* ============================================ */
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+    .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+
+.btn-success {
+    background: linear-gradient(135deg, #27AE60 0%, #2ECC71 100%);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #F39C12 0%, #F1C40F 100%);
+    color: white;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+}
+
+.btn-info {
+    background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%);
+    color: white;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #95A5A6 0%, #7F8C8D 100%);
+    color: white;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);
+}
+
+.btn-outline-danger {
+    border: 2px solid #E74C3C;
+    color: #E74C3C;
+}
+
+    .btn-outline-danger:hover {
+        background-color: #E74C3C;
+        color: white;
+    }
+
+/* ============================================ */
+/*         العناوين (Headings)                   */
+/* ============================================ */
+h2 {
+    color: #2C3E50;
+    font-weight: 900;
+    position: relative;
+    display: inline-block;
+}
+
+    h2::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        right: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(135deg, #3498DB 0%, #2ECC71 100%);
+        border-radius: 2px;
+    }
+
+/* ============================================ */
+/*         النماذج (Forms)                      */
+/* ============================================ */
+.form-control {
+    border-radius: 10px;
+    border: 2px solid #E0E0E0;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+    font-family: 'Tajawal', sans-serif;
+}
+
+    .form-control:focus {
+        border-color: #3498DB;
+        box-shadow: 0 0 0 0.2rem rgba(52,152,219,0.25);
+    }
+
+.form-label {
+    font-weight: 600;
+    color: #2C3E50;
+    margin-bottom: 5px;
+}
+
+/* ============================================ */
+/*         التنبيهات (Alerts)                   */
+/* ============================================ */
+.alert {
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    text-align: center;
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================ */
+/*         صفحة تسجيل الدخول                    */
+/* ============================================ */
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2C3E50 0%, #3498DB 100%);
+}
+
+.login-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    width: 420px;
+    text-align: center;
+}
+
+    .login-card h2 {
+        margin-bottom: 20px;
+    }
+
+    .login-card .btn-primary {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1rem;
+    }
+
+/* ============================================ */
+/*         Footer                               */
+/* ============================================ */
+footer {
+    background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
+    color: rgba(255,255,255,0.8) !important;
+    padding: 15px 0;
+    margin-top: 40px !important;
+    border-top: none !important;
+}
+
+/* ============================================ */
+/*         صندوق البحث                          */
+/* ============================================ */
+.input-group .form-control {
+    border-left: none;
+}
+
+.input-group .btn {
+    border-radius: 0 10px 10px 0;
+}
+
+/* ============================================ */
+/*         الفيديو                              */
+/* ============================================ */
+.ratio {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* ============================================ */
+/*         متجاوب مع الجوال                     */
+/* ============================================ */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .table {
+        font-size: 0.9rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+}

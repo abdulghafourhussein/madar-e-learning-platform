@@ -1,0 +1,29 @@
+﻿@model Madar.Models.Lecture
+
+@{
+    ViewData["Title"] = "حذف محاضرة";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-danger">🗑️ تأكيد حذف المحاضرة</h2>
+
+    <div class="alert alert-warning">
+        <strong>هل أنت متأكد أنك تريد حذف هذه المحاضرة؟</strong> لا يمكن التراجع عن هذا الإجراء.
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Title</h5>
+            <p class="card-text">
+                <strong>التاريخ:</strong> @Model.LectureDate.ToString("yyyy-MM-dd")<br />
+                <strong>الوصف:</strong> @Model.Description
+            </p>
+        </div>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">🗑️ نعم، احذف المحاضرة</button>
+        <a asp-action="Index" class="btn btn-secondary">❌ إلغاء</a>
+    </form>
+</div>

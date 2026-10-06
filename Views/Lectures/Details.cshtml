@@ -1,0 +1,101 @@
+﻿@model Madar.Models.Lecture
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- بطاقة التفاصيل -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title mb-3">@Model.Title</h2>
+                    
+                    <p class="text-muted mb-3">
+                        📅 <strong>تاريخ المحاضرة:</strong> @Model.LectureDate.ToString("yyyy-MM-dd")
+                    </p>
+
+                    @if (!string.IsNullOrEmpty(Model.Description))
+                    {
+                        <div class="mb-3">
+                            <h5>📝 وصف المحاضرة</h5>
+                            <p>@Model.Description</p>
+                        </div>
+                    }
+
+                    <p class="text-muted">
+                        👥 <strong>عدد الحضور:</strong>
+                        <span class="badge bg-primary">@ViewBag.AttendanceCount</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- فيديو اليوتيوب -->
+            @if (!string.IsNullOrEmpty(Model.VideoUrl))
+            {
+                <div class="card">
+                    <div class="card-header bg-dark text-white">
+                        <h5>🎥 فيديو المحاضرة</h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="ratio ratio-16x9">
+                            <iframe src="@Model.VideoUrl"
+                                    title="@Model.Title"
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="col-lg-4">
+            <!-- بطاقة الإجراءات -->
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h5>⚡ إجراءات</h5>
+                </div>
+                <div class="card-body">
+                    <a asp-action="Index" class="btn btn-secondary w-100 mb-2">
+                        🔙 العودة إلى المحاضرات
+                    </a>
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning w-100 mb-2">
+                                ✏️ تعديل المحاضرة
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger w-100 mb-2">
+                                🗑️ حذف المحاضرة
+                            </a>
+                        }
+                        
+                        @if (User.IsInRole("Student"))
+                        {
+                            <form asp-controller="Attendance" asp-action="Register" method="post">
+                                <input type="hidden" name="lectureId" value="@Model.Id" />
+                                <button type="submit" class="btn btn-info w-100 mb-2">
+                                    ✅ تسجيل حضور
+                                </button>
+                            </form>
+                        }
+                    }
+                </div>
+            </div>
+
+            <!-- رسالة للزائر غير المسجل -->
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <div class="alert alert-info mt-3">
+                    🔑 <a asp-area="Identity" asp-page="/Account/Login">سجل دخولك</a> لتتمكن من تسجيل الحضور.
+                </div>
+            }
+        </div>
+    </div>
+</div>
